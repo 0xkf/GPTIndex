@@ -11,7 +11,6 @@ THEURL = os.getenv('THEURL')
 print(MYAPI)
 print(THEURL)
 
-# QUESTION1 = os.getenv('QUESTION1')
 
  
 os.environ["OPENAI_API_KEY"] = MYAPI
@@ -19,7 +18,13 @@ os.environ["OPENAI_API_KEY"] = MYAPI
 json_path = "./data/wiki.json"
  
 url = THEURL
+
+
+
 documents = SimpleWebPageReader(html_to_text=True).load_data([url])
- 
+
 index = GPTSimpleVectorIndex(documents)
 index.save_to_disk(json_path)
+
+with open(json_path, mode='r', encoding='utf-8') as f:
+    print(f.read())
